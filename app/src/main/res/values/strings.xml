@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WeatherAPP</string>
+    <string name="placeholder_serch">Pesquise por cidade</string>
 </resources>
