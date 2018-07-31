@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">WeatherAPP</string>
     <string name="placeholder_serch">Pesquise por cidade</string>
+    <string name="string_humidity">Humidade</string>
+    <string name="string_sunrise">Nascer do Sol</string>
+    <string name="string_sunset">Pôr do Sol</string>
 </resources>

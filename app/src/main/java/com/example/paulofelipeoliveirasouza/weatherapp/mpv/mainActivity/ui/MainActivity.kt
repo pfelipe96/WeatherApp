@@ -1,4 +1,4 @@
-package com.example.paulofelipeoliveirasouza.weatherapp
+package com.example.paulofelipeoliveirasouza.weatherapp.mpv.mainActivity.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
