@@ -34,6 +34,7 @@ class MainPresenter @Inject constructor(
         if (view?.isNetworkAvaliableToContext()!!) {
             view?.setVisibleFrameLayout(View.GONE)
             view?.setProgressBar(View.VISIBLE)
+            view?.setVisibleMessage(View.GONE)
             mainModel.loadDataByLatAndLon(place.latLng.latitude.toString(), place.latLng.longitude.toString())
         } else {
             view?.snackBarIsNetWorking()
@@ -45,6 +46,8 @@ class MainPresenter @Inject constructor(
                 onError = {
                     view?.snackBarOnError("Cidade não encontrada, por gentileza tente novamente")
                     view?.setProgressBar(View.GONE)
+                    view?.setVisibleMessage(View.GONE)
+                    view?.setVisibleMessage(View.VISIBLE)
                 },
                 onSuccess = {
                     handlerData(it)
@@ -77,6 +80,7 @@ class MainPresenter @Inject constructor(
         if (view?.isNetworkAvaliableToContext()!!) {
             if (location.latitude.toString().isNotEmpty() && location.longitude.toString().isNotEmpty()) {
                 view?.setProgressBar(View.VISIBLE)
+                view?.setVisibleMessage(View.GONE)
                 mainModel.loadDataByLatAndLon(location.latitude.toString(), location.longitude.toString())
             }
         } else {

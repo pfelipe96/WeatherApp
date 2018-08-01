@@ -16,6 +16,7 @@ interface MainActivityInterface{
 
     fun setProgressBar(visible: Int)
     fun setVisibleFrameLayout(visible: Int)
+    fun setVisibleMessage(visible: Int)
     fun getLocation()
     fun getPermissionLocation()
     fun isNetworkAvaliableToContext(): Boolean

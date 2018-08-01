@@ -8,4 +8,5 @@
     <string name="dialog_title_city_not_found">Cidade não encontrada, por gentileza tente novamente!</string>
     <string name="message_repeat_permission">Tem certeza que não deseja sabe o tempo em sua localização?</string>
     <string name="title_repeat_permission">Permissão</string>
+    <string name="message_obs">*Algumas vezes a pesquisa não sair da mesma forma que o resultado, pois usamos geolocalização</string>
 </resources>

@@ -234,10 +234,31 @@
         android:visibility="gone"/>
 
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/message_obs"
+        android:textAlignment="center"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
         android:id="@+id/message_error"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Vix, deu algo errado ai, tenta novamente"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Que tal consultar o tempo,\n só clicar no campo acima!"
+        android:textAllCaps="true"
+        android:textAlignment="center"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_view_search"
         android:visibility="gone"/>
 
 </android.support.constraint.ConstraintLayout>

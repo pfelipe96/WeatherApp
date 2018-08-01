@@ -19,6 +19,8 @@ import android.net.ConnectivityManager
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.design.widget.Snackbar
+import android.support.transition.Fade
+import android.support.transition.TransitionManager
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
 import android.widget.TextView
@@ -83,6 +85,7 @@ class MainActivity : AppCompatActivity(), MainActivityInterface, PlaceSelectionL
     }
 
     override fun setVisibleFrameLayout(visible: Int) {
+        TransitionManager.beginDelayedTransition(main_view, Fade())
         frame_layout.visibility = visible
     }
 
@@ -120,7 +123,8 @@ class MainActivity : AppCompatActivity(), MainActivityInterface, PlaceSelectionL
         builder.setTitle(getString(R.string.title_repeat_permission))
         builder.setMessage(getString(R.string.message_repeat_permission))
         builder.setPositiveButton("Sim") { dialog, _ ->
-
+            setVisibleFrameLayout(View.GONE)
+            setVisibleMessage(View.VISIBLE)
             dialog.dismiss()
         }
         builder.setNegativeButton("Não") { dialog, _ ->
@@ -128,6 +132,8 @@ class MainActivity : AppCompatActivity(), MainActivityInterface, PlaceSelectionL
             getPermissionLocation()
         }
         builder.setOnDismissListener {
+            setVisibleFrameLayout(View.GONE)
+            setVisibleMessage(View.VISIBLE)
             it.dismiss()
         }
         builder.create().show()
@@ -186,6 +192,10 @@ class MainActivity : AppCompatActivity(), MainActivityInterface, PlaceSelectionL
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onError(p0: Status?) {
         snackBarOnError("Infelizmente ocorreu um erro, por gentileza tente novamente mais tarde.")
+    }
+
+    override fun setVisibleMessage(visible: Int) {
+        message_error.visibility = visible
     }
 
 }
