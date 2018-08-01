@@ -1,14 +1,14 @@
 # WeatherAPP
 Projeto para teste de conhecimento.
 
-## App construido com Dagger2, Retrofit, RxJava/Kotlin, Mockito, Google APi e Gson. Arquitetura MVP
+## App construido com Dagger2, Retrofit, RxJava/Kotlin, Mockito, Google APi, Gson e Arquitetura MVP.
 
-O principal objetivo na aplicação é consultar o tempo de cidades.
+O principal objetivo da aplicação é consultar o tempo de cidades.
 
 ## Como o projeto está estruturado:
 
 - AppWeather
-   - api (Retrofit e RxJava/Kotlin) - Retrofit responsável por manipular a api e fazer comunição da mesma e RxJava/Kotlin responsável por fazer o gerenciamento do returno da api
+   - api (Retrofit e RxJava/Kotlin) - Retrofit responsável por manipular api e fazer comunição da mesma e RxJava/Kotlin responsável por fazer o gerenciamento do returno da api
       - OpenWeatherMapApi
       
    - data (Gson) - Classes da dados já inicializadas com Gson(Serialize), facilitando a manipulação do restful.
@@ -54,8 +54,25 @@ O principal objetivo na aplicação é consultar o tempo de cidades.
               - TextView (Texto min)
               - TextView (Temperatura min) 
           - LinearLayoutCompat
-              - Image (Texto min)
-              - TextView (Temperatura min)
+              - Image (Icon de tempo)
+              - TextView (Temperatura agora)
+              - TextView (forecast)
+          - LinearLayoutCompat
+              - TextView (Texto max)
+              - TextView (Temperatura max)
+        - ConstraitLayout
+          - TextView (Humidade)
+          - TextView (Set Humidade)
+          - TextView (Sunrise)
+          - TextView (Set sunrise)
+          - TextView (Sunset)
+          - TextView (Set sunset)
+      - ProgressBar
+      - TextView (OBS)
+      - TextView (Cation to action)
+          
+          
+        
               
               
               
