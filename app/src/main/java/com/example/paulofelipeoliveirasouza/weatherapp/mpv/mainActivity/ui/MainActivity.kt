@@ -75,9 +75,6 @@ class MainActivity : AppCompatActivity(), MainActivityInterface, PlaceSelectionL
         set_sunset.text = sunset
 
         Glide.with(this).load("http://openweathermap.org/img/w/$setImage.png").into(image_weather)
-
-        setProgressBar(View.GONE)
-        setVisibleFrameLayout(View.VISIBLE)
     }
 
     override fun setProgressBar(visible: Int) {

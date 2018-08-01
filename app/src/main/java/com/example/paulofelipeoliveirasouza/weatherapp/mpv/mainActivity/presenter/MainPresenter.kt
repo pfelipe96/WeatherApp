@@ -46,7 +46,7 @@ class MainPresenter @Inject constructor(
                 onError = {
                     view?.snackBarOnError("Cidade não encontrada, por gentileza tente novamente")
                     view?.setProgressBar(View.GONE)
-                    view?.setVisibleMessage(View.GONE)
+                    view?.setVisibleFrameLayout(View.GONE)
                     view?.setVisibleMessage(View.VISIBLE)
                 },
                 onSuccess = {
@@ -73,6 +73,10 @@ class MainPresenter @Inject constructor(
                 "${data.main.humidity}%",
                 sunRise,
                 sunSet)
+
+        view?.setProgressBar(View.GONE)
+        view?.setVisibleFrameLayout(View.VISIBLE)
+        view?.setVisibleMessage(View.GONE)
 
     }
 
