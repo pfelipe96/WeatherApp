@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/main_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,8 +22,15 @@
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:queryHint="@string/placeholder_serch" />
+            app:queryHint="@string/placeholder_serch"
+            android:visibility="gone"/>
 
+        <fragment
+            android:id="@+id/place_autocomplete_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            />
 
     </android.support.v7.widget.CardView>
 
@@ -56,6 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_top"
+                android:layout_marginBottom="32dp"
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.LinearLayoutCompat
@@ -87,11 +97,13 @@
                     android:orientation="vertical">
 
                     <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/image_weather"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_gravity="center" />
 
                     <TextView
+                        android:id="@+id/now_weather"
                         style="@style/TextEdger"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -101,7 +113,7 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/forecast"
+                        android:id="@+id/forecast_weather"
                         style="@style/TextEdger"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -156,7 +168,7 @@
                     android:gravity="start" />
 
                 <TextView
-                    android:id="@+id/humidity"
+                    android:id="@+id/set_humidity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="[PORCENTAGEM]"
@@ -178,8 +190,8 @@
                     android:gravity="start" />
 
                 <TextView
-                    app:layout_constraintTop_toBottomOf="@+id/humidity"
-                    android:id="@+id/sunrise"
+                    app:layout_constraintTop_toBottomOf="@+id/set_humidity"
+                    android:id="@+id/set_sunrise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="[HORARIO]"
@@ -202,8 +214,8 @@
                     android:gravity="start" />
 
                 <TextView
-                    app:layout_constraintTop_toBottomOf="@+id/sunrise"
-                    android:id="@+id/sunset"
+                    app:layout_constraintTop_toBottomOf="@+id/set_sunrise"
+                    android:id="@+id/set_sunset"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="[HORARIO]"
@@ -227,4 +239,12 @@
         android:indeterminateTint="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/message_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vix, deu algo errado ai, tenta novamente"
+        android:visibility="gone"/>
+
 </android.support.constraint.ConstraintLayout>

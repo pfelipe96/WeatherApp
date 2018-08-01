@@ -1,6 +1,6 @@
 package com.example.paulofelipeoliveirasouza.weatherapp.di.module
 
-import com.example.paulofelipeoliveirasouza.weatherapp.api.OpenWeatherMap
+import com.example.paulofelipeoliveirasouza.weatherapp.api.OpenWeatherMapApi
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -18,13 +18,13 @@ class ApiModule{
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl("api.openweathermap.org/data/2.5/weather")
+                .baseUrl("https://api.openweathermap.org/data/2.5/")
                 .build()
     }
 
     @Provides
-    fun provideOpenWeatherMapService(@Named("RetrofitOpenWeatherMap") openWeatherMap: Retrofit): OpenWeatherMap{
-        return openWeatherMap.create(OpenWeatherMap::class.java)
+    fun provideOpenWeatherMapService(@Named("RetrofitOpenWeatherMap") openWeatherMap: Retrofit): OpenWeatherMapApi {
+        return openWeatherMap.create(OpenWeatherMapApi::class.java)
     }
 
 }

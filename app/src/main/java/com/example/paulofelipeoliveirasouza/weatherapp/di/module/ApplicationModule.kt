@@ -9,18 +9,18 @@ import javax.inject.Singleton
 
 
 @Module
-class ApplicationModule(application: Application){
+class ApplicationModule(application: Application) {
     private val applicationInst = application
 
     @Provides
     @Singleton
-    fun provideApplication(): Application{
+    fun provideApplication(): Application {
         return applicationInst
     }
 
     @Provides
     @Singleton
-    fun provideGson(): Gson{
+    fun provideGson(): Gson {
         return GsonBuilder().setLenient().create()
     }
 }

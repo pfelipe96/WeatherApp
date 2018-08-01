@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">WeatherAPP</string>
-    <string name="placeholder_serch">Pesquise por cidade</string>
+    <string name="placeholder_serch">Pesquise o tempo de uma cidade</string>
     <string name="string_humidity">Humidade</string>
     <string name="string_sunrise">Nascer do Sol</string>
     <string name="string_sunset">Pôr do Sol</string>
+    <string name="dialog_title_not_working_networking">Provalvemente você está sem internet, por gentileza verifique a mesma!</string>
+    <string name="dialog_title_city_not_found">Cidade não encontrada, por gentileza tente novamente!</string>
+    <string name="message_repeat_permission">Tem certeza que não deseja sabe o tempo em sua localização?</string>
+    <string name="title_repeat_permission">Permissão</string>
 </resources>

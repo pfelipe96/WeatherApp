@@ -6,5 +6,6 @@ data class OpenWeatherMapData(
         @SerializedName("weather") var weather: ArrayList<WeatherData>? = null,
         @SerializedName("base") var base: String = "",
         @SerializedName("main") var main: MainData,
-        @SerializedName("sys") var sys: SysData
+        @SerializedName("sys") var sys: SysData,
+        @SerializedName("name") var nameCity: String
 )
