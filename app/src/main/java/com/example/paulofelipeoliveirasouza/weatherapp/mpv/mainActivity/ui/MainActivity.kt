@@ -2,7 +2,6 @@ package com.example.paulofelipeoliveirasouza.weatherapp.mpv.mainActivity.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -22,7 +21,6 @@ import android.support.annotation.RequiresApi
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
-import android.util.Log
 import android.widget.TextView
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -30,9 +28,8 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.places.*
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment
 import com.google.android.gms.location.places.ui.PlaceSelectionListener
-import com.google.android.gms.tasks.Task
 
-class MainActivity : AppCompatActivity(), MainActivityInterface, android.support.v7.widget.SearchView.OnQueryTextListener {
+class MainActivity : AppCompatActivity(), MainActivityInterface, PlaceSelectionListener {
 
     @Inject
     lateinit var presenter: MainPresenter
@@ -52,40 +49,13 @@ class MainActivity : AppCompatActivity(), MainActivityInterface, android.support
 
         presenter.attachView(this)
 
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        search_view.setSearchableInfo(searchManager.getSearchableInfo(componentName))
-        search_view.setOnQueryTextListener(this)
-        search_view.setIconifiedByDefault(false)
-
         getPermissionLocation()
-
 
         mGeoDataClient = Places.getGeoDataClient(this, null)
         mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null)
 
-//        val placeResult = mPlaceDetectionClient.getCurrentPlace(null)
-//        placeResult.addOnCompleteListener {
-//            if(it.isSuccessful) {
-//                val likelyPlaces = it.result
-//                for(i in likelyPlaces){
-//                    Log.i("PLACES API", String.format("Place '%s' has likelihood: %g",
-//                            i.place.name,
-//                            i.likelihood))
-//                }
-//            }
-//        }
-
-        val autoCompleteFragment = supportFragmentManager.findFragmentById(R.id.place_autocomplete_fragment) as PlaceAutocompleteFragment
-
-        autoCompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener{
-            override fun onPlaceSelected(p0: Place?) {
-                p0
-            }
-
-            override fun onError(p0: Status?) {
-                p0
-            }
-        })
+        val autoCompleteFragment = fragmentManager.findFragmentById(R.id.place_autocomplete_fragment) as PlaceAutocompleteFragment
+        autoCompleteFragment.setOnPlaceSelectedListener(this)
     }
 
 
@@ -106,16 +76,6 @@ class MainActivity : AppCompatActivity(), MainActivityInterface, android.support
 
         setProgressBar(View.GONE)
         setVisibleFrameLayout(View.VISIBLE)
-    }
-
-    override fun onQueryTextChange(p0: String?): Boolean = true
-
-    override fun onQueryTextSubmit(p0: String?): Boolean {
-        p0?.let {
-            presenter.getDataByCity(it)
-        }
-
-        return false
     }
 
     override fun setProgressBar(visible: Int) {
@@ -192,7 +152,7 @@ class MainActivity : AppCompatActivity(), MainActivityInterface, android.support
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    override fun snackBarCityNotFound(message: String) {
+    override fun snackBarOnError(message: String) {
         val snackBar = Snackbar
                 .make(main_view, message, 20000)
                 .setActionTextColor(getColor(R.color.colorAccent))
@@ -215,6 +175,17 @@ class MainActivity : AppCompatActivity(), MainActivityInterface, android.support
             isAvailable = true
         }
         return isAvailable
+    }
+
+    override fun onPlaceSelected(p0: Place?) {
+        p0?.let {
+            presenter.getDataByCity(it)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onError(p0: Status?) {
+        snackBarOnError("Infelizmente ocorreu um erro, por gentileza tente novamente mais tarde.")
     }
 
 }

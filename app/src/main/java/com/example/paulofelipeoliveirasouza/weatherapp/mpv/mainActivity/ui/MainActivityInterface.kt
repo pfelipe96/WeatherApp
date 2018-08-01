@@ -20,6 +20,6 @@ interface MainActivityInterface{
     fun getPermissionLocation()
     fun isNetworkAvaliableToContext(): Boolean
     fun snackBarIsNetWorking()
-    fun snackBarCityNotFound(message: String)
+    fun snackBarOnError(message: String)
 
 }

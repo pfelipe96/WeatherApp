@@ -5,7 +5,6 @@ import com.example.paulofelipeoliveirasouza.weatherapp.mpv.mainActivity.presente
 interface MainModelInterface{
 
     fun attachPresenter(presenter: MainPresenterInterface)
-    fun loadDataOpen(nameCity: String)
     fun loadDataByLatAndLon(lat: String, lon: String)
 
 }

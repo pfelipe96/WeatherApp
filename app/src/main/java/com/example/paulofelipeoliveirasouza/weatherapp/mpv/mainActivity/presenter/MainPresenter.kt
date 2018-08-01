@@ -2,11 +2,11 @@ package com.example.paulofelipeoliveirasouza.weatherapp.mpv.mainActivity.present
 
 import android.annotation.SuppressLint
 import android.location.Location
-import android.opengl.Visibility
 import android.view.View
 import com.example.paulofelipeoliveirasouza.weatherapp.data.OpenWeatherMapData
 import com.example.paulofelipeoliveirasouza.weatherapp.mpv.mainActivity.model.MainModel
 import com.example.paulofelipeoliveirasouza.weatherapp.mpv.mainActivity.ui.MainActivityInterface
+import com.google.android.gms.location.places.Place
 import io.reactivex.Single
 import io.reactivex.rxkotlin.subscribeBy
 import java.lang.ref.WeakReference
@@ -30,13 +30,11 @@ class MainPresenter @Inject constructor(
         reference = WeakReference(view)
     }
 
-    override fun getDataByCity(valueObject: String) {
+    override fun getDataByCity(place: Place) {
         if (view?.isNetworkAvaliableToContext()!!) {
-            if (valueObject.isNotEmpty()) {
-                mainModel.loadDataOpen(valueObject)
-                view?.setVisibleFrameLayout(View.GONE)
-                view?.setProgressBar(View.VISIBLE)
-            }
+            view?.setVisibleFrameLayout(View.GONE)
+            view?.setProgressBar(View.VISIBLE)
+            mainModel.loadDataByLatAndLon(place.latLng.latitude.toString(), place.latLng.longitude.toString())
         } else {
             view?.snackBarIsNetWorking()
         }
@@ -45,7 +43,7 @@ class MainPresenter @Inject constructor(
     override fun handlerOpenWeatherMap(singleCreateOpenWeather: Single<OpenWeatherMapData>) {
         singleCreateOpenWeather.subscribeBy(
                 onError = {
-                    view?.snackBarCityNotFound("Cidade não encontrada, por gentileza tente novamente")
+                    view?.snackBarOnError("Cidade não encontrada, por gentileza tente novamente")
                     view?.setProgressBar(View.GONE)
                 },
                 onSuccess = {
@@ -77,9 +75,10 @@ class MainPresenter @Inject constructor(
 
     override fun getLocationUser(location: Location) {
         if (view?.isNetworkAvaliableToContext()!!) {
-            if (location.latitude.toString().isNotEmpty() && location.longitude.toString().isNotEmpty())
+            if (location.latitude.toString().isNotEmpty() && location.longitude.toString().isNotEmpty()) {
                 view?.setProgressBar(View.VISIBLE)
-            mainModel.loadDataByLatAndLon(location.latitude.toString(), location.longitude.toString())
+                mainModel.loadDataByLatAndLon(location.latitude.toString(), location.longitude.toString())
+            }
         } else {
             view?.snackBarIsNetWorking()
         }

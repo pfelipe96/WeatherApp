@@ -20,14 +20,6 @@ class MainModel @Inject constructor(
         reference = WeakReference(presenter)
     }
 
-    override fun loadDataOpen(nameCity: String) {
-        val returnApi = openWeatherMapApi.getDataForecast(nameCity)
-                .subscribeOn(IoScheduler())
-                .observeOn(AndroidSchedulers.mainThread())
-
-        presenter?.handlerOpenWeatherMap(returnApi)
-    }
-
     override fun loadDataByLatAndLon(lat: String, lon: String) {
         val returnApi = openWeatherMapApi.getDataForecastByLatAndLon(lat, lon)
                 .subscribeOn(IoScheduler())
